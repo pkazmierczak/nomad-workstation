@@ -22,6 +22,7 @@ apt install -y --no-install-recommends \
     nomad \
     podman \
     ripgrep \
+    terraform \
     tzdata \
     vault \
     vim \
