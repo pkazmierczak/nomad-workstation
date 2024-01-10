@@ -29,7 +29,7 @@ apt install -y --no-install-recommends \
     zsh
 usermod -a -G docker ubuntu
 
-cat >> /home/ubuntu/.profile <<EOF
+cat >> /home/ubuntu/.zshrc <<EOF
 export PATH=~/go/bin:/usr/local/go/bin:$PATH
 EOF
 cat >> /home/ubuntu/.ssh/id_ed25519 <<EOF
