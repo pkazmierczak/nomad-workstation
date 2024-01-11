@@ -30,9 +30,6 @@ apt install -y --no-install-recommends \
     zsh
 usermod -a -G docker ubuntu
 
-cat >> /home/ubuntu/.zshrc <<EOF
-export PATH=~/go/bin:/usr/local/go/bin:$PATH
-EOF
 cat >> /home/ubuntu/.ssh/id_ed25519 <<EOF
 ${SSH_PRIVATE_KEY}
 EOF
@@ -62,6 +59,9 @@ rm -f /usr/bin/vim
 ln -s /usr/bin/nvim /usr/bin/vim
 git clone https://github.com/robbyrussell/oh-my-zsh.git /home/ubuntu/.oh-my-zsh
 cp /home/ubuntu/.oh-my-zsh/templates/zshrc.zsh-template /home/ubuntu/.zshrc
+cat >> /home/ubuntu/.zshrc <<EOF
+export PATH=~/go/bin:/usr/local/go/bin:$PATH
+EOF
 usermod -s /bin/zsh ubuntu
 curl -L https://go.dev/dl/go1.21.5.linux-amd64.tar.gz | tar -C /usr/local -zxv
 sudo -u ubuntu git clone git@github.com:hashicorp/nomad.git /home/ubuntu/nomad
