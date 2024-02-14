@@ -17,6 +17,16 @@ module "keys" {
   path = "${path.root}/keys"
 }
 
+data "aws_ami" "ubuntu" {
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20240126"]
+  }
+
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+}
+
 data "http" "myip" {
   url = "http://ipv4.icanhazip.com"
 }
@@ -118,10 +128,9 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "nomad_server" {
-  ami = "ami-065deacbcaac64cf2" # ubuntu 22.04
-  # ami           = "ami-052fd6480942d8e43" # debian 11
+  ami           = data.aws_ami.ubuntu
   instance_type = "c5.xlarge"
-  # instance_type               = "c5n.metal"
+  # instance_type               = "c5n.metal"  # for NUMA testing
   subnet_id                   = aws_subnet.nomad_test_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   key_name                    = module.keys.key_name
@@ -145,10 +154,8 @@ variable "client_names" {
 }
 
 resource "aws_instance" "nomad_client" {
-  ami = "ami-065deacbcaac64cf2" # ubuntu 22.04
-  # ami           = "ami-052fd6480942d8e43" # debian 11
-  instance_type = "m5.large"
-  # instance_type               = "c5n.metal"
+  ami                         = data.aws_ami.ubuntu
+  instance_type               = "m5.large"
   subnet_id                   = aws_subnet.nomad_test_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   key_name                    = module.keys.key_name
