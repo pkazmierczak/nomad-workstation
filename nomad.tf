@@ -128,7 +128,7 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "nomad_server" {
-  ami           = data.aws_ami.ubuntu
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "c5.xlarge"
   # instance_type               = "c5n.metal"  # for NUMA testing
   subnet_id                   = aws_subnet.nomad_test_subnet.id
@@ -154,7 +154,7 @@ variable "client_names" {
 }
 
 resource "aws_instance" "nomad_client" {
-  ami                         = data.aws_ami.ubuntu
+  ami                         = data.aws_ami.ubuntu.id
   instance_type               = "m5.large"
   subnet_id                   = aws_subnet.nomad_test_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
