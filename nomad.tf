@@ -9,6 +9,14 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
+module "keys" {
+  source  = "mitchellh/dynamic-keys/aws"
+  version = "v2.0.0"
+
+  name = "nomad-workstation"
+  path = "${path.root}/keys"
+}
+
 data "http" "myip" {
   url = "http://ipv4.icanhazip.com"
 }
@@ -116,7 +124,7 @@ resource "aws_instance" "nomad_server" {
   # instance_type               = "c5n.metal"
   subnet_id                   = aws_subnet.nomad_test_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
-  key_name                    = "piotr"
+  key_name                    = module.keys.key_name
   associate_public_ip_address = true
   user_data = (templatefile("${path.module}/userdata.sh", {
     NOMAD_CONF      = file("${path.module}/nomad_server.hcl")
@@ -143,7 +151,7 @@ resource "aws_instance" "nomad_client" {
   # instance_type               = "c5n.metal"
   subnet_id                   = aws_subnet.nomad_test_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
-  key_name                    = "piotr"
+  key_name                    = module.keys.key_name
   associate_public_ip_address = true
   user_data = (templatefile("${path.module}/userdata.sh", {
     NOMAD_CONF = templatefile("${path.module}/nomad_client.hcl", {
