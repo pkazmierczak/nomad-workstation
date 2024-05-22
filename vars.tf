@@ -10,7 +10,7 @@ variable "region" {
 
 variable "nomad_server_instance_type" {
   description = "The AWS instance type to use for servers."
-  default     = "c5.xlarge"
+  default     = "c7a.xlarge"
 }
 
 variable "nomad_client_instance_type" {

@@ -108,7 +108,7 @@ ssh into servers with:
  %{endfor~}
 ssh into clients with:
  %{for ip in aws_instance.nomad_client.*.public_ip~}
-    ssh -i keys/${module.keys.key_name}.pem ubuntu@${ip}
+   ssh -i keys/${module.keys.key_name}.pem ubuntu@${ip}
  %{endfor~}
 EOM
 }
