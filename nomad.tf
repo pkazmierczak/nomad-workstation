@@ -141,7 +141,7 @@ resource "aws_instance" "nomad_server" {
     SSH_PUBLIC_KEY  = file("/Users/piotrkazmierczak/.ssh/id_ed25519.pub"),
   }))
   root_block_device {
-    volume_size = 20
+    volume_size = 100
   }
 
   tags = {
@@ -168,7 +168,7 @@ resource "aws_instance" "nomad_client" {
     SSH_PUBLIC_KEY  = file("/Users/piotrkazmierczak/.ssh/id_ed25519.pub"),
   }))
   root_block_device {
-    volume_size = 20
+    volume_size = 100
   }
 
   for_each = toset(var.client_names)
