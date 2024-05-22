@@ -31,10 +31,10 @@ apt install -y --no-install-recommends \
 usermod -a -G docker ubuntu
 
 cat >> /home/ubuntu/.ssh/id_ed25519 <<EOF
-${SSH_PRIVATE_KEY}
+${ssh_private_key}
 EOF
 cat >> /home/ubuntu/.ssh/id_ed25519.pub <<EOF
-${SSH_PUBLIC_KEY}
+${ssh_public_key}
 EOF
 chmod 0400 /home/ubuntu/.ssh/id*
 export HOME="/home/ubuntu"
@@ -44,7 +44,7 @@ ssh-keyscan github.com >> /home/ubuntu/.ssh/known_hosts
 chown -R ubuntu:ubuntu /home/ubuntu
 
 cat > /home/ubuntu/nomad.hcl <<EOF
-${NOMAD_CONF}
+${nomad_conf}
 EOF
 
 ln -fs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
