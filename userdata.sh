@@ -50,10 +50,10 @@ EOF
 ln -fs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 apt install helix
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_0.40.2_Linux_x86_64.tar.gz"
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 install lazygit /usr/local/bin
-curl -L https://github.com/neovim/neovim/releases/download/v0.9.2/nvim.appimage -o /usr/bin/nvim
+curl -L https://github.com/neovim/neovim/releases/download/v0.10.0/nvim.appimage -o /usr/bin/nvim
 chmod 0755 /usr/bin/nvim
 rm -f /usr/bin/vim
 ln -s /usr/bin/nvim /usr/bin/vim
@@ -63,7 +63,7 @@ cat >> /home/ubuntu/.zshrc <<EOF
 export PATH=~/go/bin:/usr/local/go/bin:$PATH
 EOF
 usermod -s /bin/zsh ubuntu
-curl -L https://go.dev/dl/go1.21.5.linux-amd64.tar.gz | tar -C /usr/local -zxv
+curl -L https://go.dev/dl/go1.22.3.linux-amd64.tar.gz | tar -C /usr/local -zxv
 sudo -u ubuntu git clone git@github.com:hashicorp/nomad.git /home/ubuntu/nomad
 sudo -u ubuntu git clone git@github.com:pkazmierczak/configs.git /home/ubuntu/configs
 mkdir -p /home/ubuntu/.config/nvim
