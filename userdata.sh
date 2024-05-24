@@ -24,6 +24,7 @@ apt install -y --no-install-recommends \
     ripgrep \
     terraform \
     tzdata \
+    unzip \
     vault \
     vim \
     wget \
