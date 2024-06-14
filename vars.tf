@@ -30,7 +30,7 @@ variable "client_count" {
 
 variable "ami" {
   description = "AMI to use for Ubuntu machines."
-  default     = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20240126"
+  default     = "ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20240423"
 }
 
 variable "ssh_private_key" {
