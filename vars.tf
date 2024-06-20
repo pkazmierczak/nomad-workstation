@@ -8,6 +8,11 @@ variable "region" {
   default     = "eu-central-1"
 }
 
+variable "zone" {
+  description = "The AWS AZ to deploy to."
+  default     = "eu-central-1b" # eu-central-1a does not have c7a.xlarge instances
+}
+
 variable "nomad_server_instance_type" {
   description = "The AWS instance type to use for servers."
   default     = "c7a.xlarge"

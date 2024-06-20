@@ -40,6 +40,7 @@ provider "aws" {
 
 resource "aws_instance" "nomad_server" {
   count                       = var.server_count
+  availability_zone           = var.zone
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.nomad_server_instance_type
   subnet_id                   = aws_subnet.nomad_test_subnet.id
@@ -72,6 +73,7 @@ resource "aws_instance" "nomad_server" {
 
 resource "aws_instance" "nomad_client" {
   count                       = var.client_count
+  availability_zone           = var.zone
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.nomad_client_instance_type
   subnet_id                   = aws_subnet.nomad_test_subnet.id
