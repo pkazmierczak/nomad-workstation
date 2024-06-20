@@ -33,8 +33,9 @@ resource "aws_default_route_table" "nomad_test_route_table" {
 }
 
 resource "aws_subnet" "nomad_test_subnet" {
-  vpc_id     = aws_vpc.nomad_test_vpc.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id            = aws_vpc.nomad_test_vpc.id
+  cidr_block        = "10.0.1.0/24"
+  availability_zone = var.zone
 
   tags = {
     Name = "nomad_test_subnet"
