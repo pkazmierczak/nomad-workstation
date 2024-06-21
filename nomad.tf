@@ -106,11 +106,11 @@ output "message" {
   value = <<-EOM
 ssh into servers with:
  %{for ip in aws_instance.nomad_server.*.public_ip~}
-   ssh -i keys/${module.keys.key_name}.pem ubuntu@${ip}
+   ssh -i ${abspath(path.module)}/keys/${module.keys.key_name}.pem ubuntu@${ip}
  %{endfor~}
 ssh into clients with:
  %{for ip in aws_instance.nomad_client.*.public_ip~}
-   ssh -i keys/${module.keys.key_name}.pem ubuntu@${ip}
+   ssh -i ${abspath(path.module)}/keys/${module.keys.key_name}.pem ubuntu@${ip}
  %{endfor~}
 EOM
 }
