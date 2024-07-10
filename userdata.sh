@@ -66,6 +66,7 @@ EOF
 usermod -s /bin/zsh ubuntu
 curl -L https://go.dev/dl/go1.22.3.linux-amd64.tar.gz | tar -C /usr/local -zxv
 sudo -u ubuntu git clone git@github.com:hashicorp/nomad.git /home/ubuntu/nomad
+sudo -u ubuntu git clone git@github.com:hashicorp/nomad-enterprise.git /home/ubuntu/nomad-enterprise
 sudo -u ubuntu git clone git@github.com:pkazmierczak/configs.git /home/ubuntu/configs
 mkdir -p /home/ubuntu/.config/nvim
 ln -s /home/ubuntu/configs/.config/nvim/init.lua /home/ubuntu/.config/nvim/init.lua

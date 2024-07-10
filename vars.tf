@@ -15,7 +15,7 @@ variable "zone" {
 
 variable "nomad_server_instance_type" {
   description = "The AWS instance type to use for servers."
-  default     = "c7a.xlarge"
+  default     = "c7a.2xlarge"
 }
 
 variable "nomad_client_instance_type" {
