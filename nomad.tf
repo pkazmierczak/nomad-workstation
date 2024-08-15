@@ -47,7 +47,7 @@ resource "aws_instance" "nomad_server" {
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   key_name                    = module.keys.key_name
   iam_instance_profile        = aws_iam_instance_profile.nomad_instance_profile.id
-  associate_public_ip_address = true
+  associate_public_ip_address = false
 
   user_data = (templatefile("${path.module}/userdata.sh", {
     nomad_conf = templatefile("${path.module}/nomad_server.hcl", {
@@ -69,7 +69,6 @@ resource "aws_instance" "nomad_server" {
     Nomad_role = "${var.cluster_name}_server"
   }
 }
-
 
 resource "aws_instance" "nomad_client" {
   count                       = var.client_count
@@ -105,12 +104,12 @@ resource "aws_instance" "nomad_client" {
 output "message" {
   value = <<-EOM
 ssh into servers with:
- %{for ip in aws_instance.nomad_server.*.public_ip~}
-   ssh -i ${abspath(path.module)}/keys/${module.keys.key_name}.pem ubuntu@${ip}
- %{endfor~}
+%{for ip in aws_eip.nomad_server_eip.*.public_ip~}
+ ssh -i ${abspath(path.module)}/keys/${module.keys.key_name}.pem ubuntu@${ip}
+%{endfor~}
 ssh into clients with:
- %{for ip in aws_instance.nomad_client.*.public_ip~}
-   ssh -i ${abspath(path.module)}/keys/${module.keys.key_name}.pem ubuntu@${ip}
- %{endfor~}
+%{for ip in aws_instance.nomad_client.*.public_ip~}
+ ssh -i ${abspath(path.module)}/keys/${module.keys.key_name}.pem ubuntu@${ip}
+%{endfor~}
 EOM
 }

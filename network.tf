@@ -7,7 +7,7 @@ resource "aws_vpc" "nomad_test_vpc" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "nomad_test_vpc"
+    Name = "${var.cluster_name}_vpc"
   }
 }
 
@@ -15,7 +15,17 @@ resource "aws_internet_gateway" "nomad_test_igw" {
   vpc_id = aws_vpc.nomad_test_vpc.id
 
   tags = {
-    Name = "nomad_test_igw"
+    Name = "${var.cluster_name}_igw"
+  }
+}
+
+resource "aws_eip" "nomad_server_eip" {
+  count    = var.server_count
+  instance = "${element(aws_instance.nomad_server.*.id, count.index)}"
+  vpc      = true
+
+  tags = {
+    Name = "${var.cluster_name}_server_eip_${count.index}"
   }
 }
 
@@ -28,7 +38,7 @@ resource "aws_default_route_table" "nomad_test_route_table" {
   }
 
   tags = {
-    Name = "nomad_test_route_table"
+    Name = "${var.cluster_name}_route_table"
   }
 }
 
@@ -38,7 +48,7 @@ resource "aws_subnet" "nomad_test_subnet" {
   availability_zone = var.zone
 
   tags = {
-    Name = "nomad_test_subnet"
+    Name = "${var.cluster_name}_subnet"
   }
 }
 
@@ -91,6 +101,6 @@ resource "aws_security_group" "allow_ssh" {
   }
 
   tags = {
-    Name = "allow_ssh"
+    Name = "${var.cluster_name}_allow_ssh"
   }
 }
