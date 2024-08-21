@@ -13,4 +13,5 @@ plugin "raw_exec" {
   }
 }
 
-data_dir = "/home/ubuntu/nomad_tmp"
+data_dir  = "/home/ubuntu/nomad_tmp"
+log_level = "debug"
