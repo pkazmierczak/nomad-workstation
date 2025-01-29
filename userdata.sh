@@ -50,7 +50,8 @@ curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/downl
 tar xf lazygit.tar.gz lazygit
 install lazygit /usr/local/bin
 curl -L https://github.com/helix-editor/helix/releases/download/25.01.1/helix-25.01.1-x86_64.AppImage -o /usr/bin/hx
-curl -L https://github.com/neovim/neovim/releases/download/v0.10.4/nvim.appimage -o /usr/bin/nvim
+chmod 0755 /usr/bin/hx
+curl -L https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage -o /usr/bin/nvim
 chmod 0755 /usr/bin/nvim
 rm -f /usr/bin/vim
 ln -s /usr/bin/nvim /usr/bin/vim
