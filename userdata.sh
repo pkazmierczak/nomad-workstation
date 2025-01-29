@@ -1,9 +1,7 @@
 #!/bin/bash -xe
-add-apt-repository ppa:maveonair/helix-editor
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 apt update
-# apt upgrade -y
 apt install -y --no-install-recommends \
     build-essential \
     consul \
@@ -20,7 +18,6 @@ apt install -y --no-install-recommends \
     mosh \
     net-tools \
     nomad \
-    podman \
     ripgrep \
     terraform \
     tzdata \
@@ -50,11 +47,11 @@ EOF
 
 ln -fs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
-apt install helix
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 install lazygit /usr/local/bin
-curl -L https://github.com/neovim/neovim/releases/download/v0.10.0/nvim.appimage -o /usr/bin/nvim
+curl -L https://github.com/helix-editor/helix/releases/download/25.01.1/helix-25.01.1-x86_64.AppImage -o /usr/bin/hx
+curl -L https://github.com/neovim/neovim/releases/download/v0.10.4/nvim.appimage -o /usr/bin/nvim
 chmod 0755 /usr/bin/nvim
 rm -f /usr/bin/vim
 ln -s /usr/bin/nvim /usr/bin/vim
