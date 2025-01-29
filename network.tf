@@ -30,7 +30,7 @@ resource "aws_eip" "nomad_server_eip" {
 }
 
 resource "aws_eip" "nomad_client_eip" {
-  count    = var.server_count
+  count    = var.client_count
   instance = "${element(aws_instance.nomad_client.*.id, count.index)}"
   vpc      = true
 
