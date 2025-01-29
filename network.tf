@@ -29,6 +29,16 @@ resource "aws_eip" "nomad_server_eip" {
   }
 }
 
+resource "aws_eip" "nomad_client_eip" {
+  count    = var.server_count
+  instance = "${element(aws_instance.nomad_client.*.id, count.index)}"
+  vpc      = true
+
+  tags = {
+    Name = "${var.cluster_name}_client_eip_${count.index}"
+  }
+}
+
 resource "aws_default_route_table" "nomad_test_route_table" {
   default_route_table_id = aws_vpc.nomad_test_vpc.default_route_table_id
 
