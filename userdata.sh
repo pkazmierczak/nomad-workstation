@@ -9,7 +9,6 @@ apt install -y --no-install-recommends \
     fzf \
     git \
     gcc \
-    helix \
     jq \
     libfuse2 \
     lxc \
