@@ -59,9 +59,10 @@ git clone https://github.com/robbyrussell/oh-my-zsh.git /home/ubuntu/.oh-my-zsh
 cp /home/ubuntu/.oh-my-zsh/templates/zshrc.zsh-template /home/ubuntu/.zshrc
 cat >> /home/ubuntu/.zshrc <<EOF
 export PATH=~/go/bin:/usr/local/go/bin:$PATH
+export GOTOOLCHAIN=go1.24.1
 EOF
 usermod -s /bin/zsh ubuntu
-curl -L https://go.dev/dl/go1.22.3.linux-amd64.tar.gz | tar -C /usr/local -zxv
+curl -L https://go.dev/dl/go1.24.1.linux-amd64.tar.gz | tar -C /usr/local -zxv
 sudo -u ubuntu git clone git@github.com:hashicorp/nomad.git /home/ubuntu/nomad
 sudo -u ubuntu git clone git@github.com:hashicorp/nomad-enterprise.git /home/ubuntu/nomad-enterprise
 sudo -u ubuntu git clone git@github.com:pkazmierczak/configs.git /home/ubuntu/configs
